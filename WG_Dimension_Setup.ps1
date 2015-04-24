@@ -1,7 +1,7 @@
 ﻿#requires -version 4.0
 #
 # All of the steps needed to create a new Dimension server in MS Hyper-V
-# This script is intended to run from the local server
+# This script is intended to run from the local server where Dimension will be stored
 # extract .zip file
 # copy files to c:\vm\dimension
 #
@@ -9,11 +9,11 @@
 #
 # TODO: Unzip file
 #
-$uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_1_1_U1/watchguard-dimension_1_1_U1_vhd.zip'   # location of file on internet
+$uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_1_3_U2/watchguard-dimension_1_3_U2_vhd.zip'   # location of file on internet
 $vswitch = 'vswitch1'   # name of new vswitch that will be created.  Can use existing
 $nic = 'Ethernet 3'   # use Get-NetAdapter to determine the adapter name
 $vmpath = 'C:\vm\Dimension\'   # Path to where the VM config will be stored
-$bootvhd = 'watchguard-dimension_1_1.vhd'  # Path to the .vhd file from WG
+$bootvhd = 'watchguard-dimension_1_3_U2.vhd'  # Path to the .vhd file from WG
 $vmname = 'WG_Dimension'   # name of the VM
 $datavhd = 'data.vhdx'   # path where new virtual data drive will be stored
 # 
