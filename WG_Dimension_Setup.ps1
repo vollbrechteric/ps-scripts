@@ -1,6 +1,11 @@
 ﻿#requires -version 4.0
 #
-# All of the steps needed to create a new Dimension server in MS Hyper-V
+# Created by Eric Vollbrecht vollbrechteric@hotmail.com
+#
+# https://github.com/vollbrechteric/ps-scripts
+#
+# All of the steps needed to create a new Dimension server in MS Hyper-V 2008 R2 or newer.
+#
 # This script is intended to run from the local server where Dimension will be stored
 # extract .zip file
 # copy files to c:\vm\dimension
@@ -36,3 +41,5 @@ Add-VMHardDiskDrive -VMName $vmname -Path ( $vmpath + $datavhd ) -ControllerType
 #
 # boot vm
 Start-VM -Name $vmname
+#
+# end of script
