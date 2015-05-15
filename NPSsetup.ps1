@@ -1,5 +1,5 @@
 ﻿<#
-Configure Windows AD with RADIUS for WiFi Authentication with Ruckus Zone Director.
+Configure Windows AD with RADIUS
 
 1.	Install Network Policy Server role.
 2.	Open NPS and navigate to Radius Clients and Server > Radius Clients.
