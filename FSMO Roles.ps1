@@ -1,12 +1,16 @@
-﻿# http://social.technet.microsoft.com/wiki/contents/articles/6736.move-transfering-or-seizing-fsmo-roles-with-ad-powershell-command-to-another-domain-controller-en-us.aspx
-#
-# Import ActiveDirectory Modules
+﻿#requires -version 4.0
+<#
+Created by Eric Vollbrecht vollbrechteric@hotmail.com
+
+https://github.com/vollbrechteric/ps-scripts
+
+http://social.technet.microsoft.com/wiki/contents/articles/6736.move-transfering-or-seizing-fsmo-roles-with-ad-powershell-command-to-another-domain-controller-en-us.aspx
+#>
+#Import ActiveDirectory Modules
+# 
 Import-Module -Name ActiveDirectory
-#
 # You can view FSMO role owner with this AD-Powershell commands:
-#
 Get-ADForest | Select-Object SchemaMaster,DomainNamingMaster
-#
 Get-ADDomain | Select-Object PDCEmulator,RIDMaster,InfrastructureMaster
 #
 # Moving the FSMO roles with the AD PowerShell has the following advantages:
