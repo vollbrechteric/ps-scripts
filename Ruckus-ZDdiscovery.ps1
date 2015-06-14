@@ -1,7 +1,14 @@
-﻿<# Configures network so that Ruckus ZoneFlex APs can more easily find Ruckus ZoneDirectors.
+﻿#requires -version 4.0
+<#
+Created by Eric Vollbrecht vollbrechteric@hotmail.com
+
+https://github.com/vollbrechteric/ps-scripts
+
+Configure network so that Ruckus ZoneFlex APs can more easily find Ruckus ZoneDirector controllers.
 
 Run this script on a server with the DHCP and DNS role installed.
 #>
+
 $zdip = Read-Host -Prompt 'IP address of ZoneDirector?'
 $zdfqdn = Read-Host -Prompt 'FQDN of the ZoneDirector?'
 $zddomin = $zdfqdn -split '.', 0, 'simplematch'
