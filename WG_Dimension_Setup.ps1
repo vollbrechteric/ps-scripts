@@ -14,7 +14,7 @@ TODO: Check hash with get-filehash or see if it can be done with a method
 
 TODO: Unzip file
 #>
-$uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_1_3_U2/watchguard-dimension_1_3_U2_vhd.zip'   # location of file on internet
+$uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_2_0_U2/watchguard-dimension_2_0_U2_vhd.zip'   # location of file on internet
 $vswitch = 'vswitch1'   # name of new vswitch that will be created.  Can use existing
 $nic = 'Ethernet 3'   # use Get-NetAdapter to determine the adapter name
 $vmpath = 'C:\vm\Dimension\'   # Path to where the VM config will be stored
