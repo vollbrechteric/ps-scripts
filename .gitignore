@@ -220,3 +220,4 @@ pip-log.txt
 #############
 
 *.history.zip
+.vscode/settings.json
