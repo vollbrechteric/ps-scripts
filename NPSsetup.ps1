@@ -1,5 +1,13 @@
-﻿<#
+﻿#requires -version 4.0
+<#
+Created by Eric Vollbrecht vollbrechteric@hotmail.com
+
+https://github.com/vollbrechteric/ps-scripts
+
 Configure Windows AD with RADIUS
+#>
+
+<#
 
 1.	Install Network Policy Server role.
 2.	Open NPS and navigate to Radius Clients and Server > Radius Clients.
