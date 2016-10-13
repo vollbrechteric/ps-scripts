@@ -1,1 +1,1 @@
-﻿(Invoke-WebRequest -Uri 'https://secure.informaction.com/ipecho/' -UseBasicParsing).Content
+﻿(Invoke-RestMethod -Uri 'https://ipinfo.io' -UseBasicParsing).ip
