@@ -18,7 +18,7 @@ $uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_2_0_U2/watc
 $vswitch = 'vswitch1'   # name of new vswitch that will be created.  Can use existing
 $nic = 'Ethernet 3'   # use Get-NetAdapter to determine the adapter name
 $vmpath = 'C:\vm\Dimension\'   # Path to where the VM config will be stored
-$bootvhd = 'watchguard-dimension_1_3_U2.vhd'  # Path to the .vhd file from WG
+$bootvhd = 'watchguard-dimension_2_1_1_U1.vhd'  # Path to the .vhd file from WG
 $vmname = 'WG_Dimension'   # name of the VM
 $datavhd = 'data.vhdx'   # path where new virtual data drive will be stored
 # 
