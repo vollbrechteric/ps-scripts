@@ -58,8 +58,10 @@ param
 )
 # 
 # TODO: Test path and if file exists skip downloading the file
-if ( "$vmpath\$bootvhd" -eq $false)
+if ( (Test-Path -Path "$vmpath\$bootvhd" -IsValid -eq $false) ())
 {
+    # Make the folder
+    
     # Download the file
     Start-BitsTransfer -Source $uri -Destination $downloaddest  -TransferType Download
     # Extract file
