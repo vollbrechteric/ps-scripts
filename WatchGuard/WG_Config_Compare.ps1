@@ -11,8 +11,11 @@ Compare a WatchGuard xml confige file to call out items that are not best practi
 # Path to config
 Set-Variable -Name wd -Description 'Working directory where xml files are located' -Value "$HOME\Documents\my watchguard\configs"
 
-# The parent config
-$parent = [xml]( Get-Content "$wd\XTM26-W.xml" )
+# The reference config
+$ref = [xml]( Get-Content -Path "$wd\XTM26-W.xml" )
 
-# The child config
-$child = [xml]( Get-Content "$wd\XTM26-W.xml" )
+# The difference config that is being compared to the reference
+$dif = [xml]( Get-Content -Path "$wd\XTM26-W.xml" )
+
+# The compare
+Compare-Object -ReferenceObject $ref -DifferenceObject $dif
