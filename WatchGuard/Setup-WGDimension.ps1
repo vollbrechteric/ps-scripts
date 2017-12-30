@@ -1,4 +1,4 @@
-﻿#requires -Modules BitsTransfer, Hyper-V
+﻿#requires -Modules BitsTransfer, Hyper-V, NetAdapter, ServerManager
 #requires -version 5.0
 <#
         Created by Eric Vollbrecht vollbrechteric@hotmail.com
@@ -27,7 +27,9 @@ param
 
     [Parameter( Position = 3 )]
     # 'Use Get-NetAdapter to determine the adapter name'
-    [String] $nic = ( Get-NetAdapter -Physical | Where-Object { $_.ConnectorPresent -EQ 'True' -AND $_.PhysicalMediaType -EQ '802.3' } ), 
+    [String] $nic = ( Get-NetAdapter -Physical | Where-Object -FilterScript {
+            $_.ConnectorPresent -EQ 'True' -AND $_.PhysicalMediaType -EQ '802.3' 
+    } ), 
 
     [Parameter( Position = 4 )]
     # 'Path to where the VM config will be stored'
@@ -49,15 +51,21 @@ param
 
 )
 # 
-#
+# Update when download address changes
 $download = "$downloaddest\watchguard-dimension_2_1_1_U1_vhd.zip"
 #
-# Test path and if file exists skip downloading the file
+# Check if Hyper-V is installed
+if ( (Get-WindowsFeature -Name 'Hyper-V').Installed -eq $false )
+{
+    Install-WindowsFeature -Name 'Hyper-V' -IncludeAllSubFeature
+}
+#
+# If command line switch specifed skip the download
 if ( $SkipDownload ) 
 {
-    # If command line switch specifed skip the download
     $null
 }
+# Test path and if file exists skip downloading the file
 elseif ( ( Test-Path -Path "$vmpath\$bootvhd" ) -eq $false )
 {    
     # Create folder for VM
