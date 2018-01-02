@@ -15,7 +15,7 @@ param
 (
     [Parameter( Position = 0 )]
     # HelpMessage = 'Location of install file on the internet'
-    [String] $uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_2_1_1_U1/watchguard-dimension_2_1_1_U1_vhd.zip',
+    [String] $uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_2_1_1_U2/watchguard-dimension_2_1_1_U2_vhd.zip',
 
     [Parameter( Position = 1 )]
     # 'Destination for the downloaded file'
@@ -37,7 +37,7 @@ param
 
     [Parameter( Position = 5 )]
     # 'Path to the .vhd file from WG'
-    [String] $bootvhd = 'watchguard-dimension_2_1_1_U1.vhd', 
+    [String] $bootvhd = 'watchguard-dimension_2_1_1_U2.vhd', 
 
     [Parameter( Position = 6 )]
     # 'Name of the VM'
@@ -52,7 +52,7 @@ param
 )
 # 
 # Update when download address changes
-$download = "$downloaddest\watchguard-dimension_2_1_1_U1_vhd.zip"
+$download = "$downloaddest\watchguard-dimension_2_1_1_U2_vhd.zip"
 #
 # Check if Hyper-V is installed
 if ( (Get-WindowsFeature -Name 'Hyper-V').Installed -eq $false )
