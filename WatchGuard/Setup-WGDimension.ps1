@@ -1,65 +1,96 @@
 ﻿#requires -Modules BitsTransfer, Hyper-V, NetAdapter, ServerManager
 #requires -version 5.0
 <#
-        Created by Eric Vollbrecht vollbrechteric@hotmail.com
-
-        https://github.com/vollbrechteric/ps-scripts
-
+        .SYNOPSIS
         All of the steps needed to create a new WatchGuard Dimension server in MS Hyper-V 2008 R2 or newer.
 
-        This script is intended to run from the local server where Dimension will be stored.
+        .DESCRIPTION
+        Long description
 
+        .PARAMETER URI
+        Location of install file on the WatchGuard website. Update this when WatchGuard releases a new version.
+
+        .PARAMETER DownloadDest
+        Destination for the downloaded file.
+
+        .PARAMETER VSwitch
+        Name of new vswitch that will be created or the existing switch that the VM will be connected to.
+
+        .PARAMETER NIC
+        Network Adapter that the VSwitch will be connected to. By default the first physical connection is selected.
+
+        .PARAMETER VMPath
+        Path to where the VM config will be stored.
+
+        .PARAMETER BootVHD
+        Path to the .vhd file from WatchGuard.
+
+        .PARAMETER VMName
+        Name of the VM. Default is WG_Dimension.
+
+        .PARAMETER DataVHD
+        Path to where new virtual data drive will be stored.
+
+        .PARAMETER SkipDownload
+        Switch to prevent skip trying to download the install file from WatchGuard. 
+
+        .EXAMPLE
+        Example of how to use this cmdlet
+
+        .EXAMPLE
+        Another example of how to use this cmdlet
+
+        .NOTES
+        Created by Eric Vollbrecht vollbrechteric@hotmail.com
+        This script is intended to run from the local server where Dimension will be stored.
         Once thc script completes check DHCP server for IP address of new VM and connect to via HTTPS and use the default credentials.
+
+        .LINK
+        https://github.com/vollbrechteric/ps-scripts
+
 #>
+
 param
 (
     [Parameter( Position = 0 )]
-    # HelpMessage = 'Location of install file on the internet'
-    [String] $uri = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_2_1_1_U2/watchguard-dimension_2_1_1_U2_vhd.zip',
+    [String] $URI = 'http://cdn.watchguard.com/SoftwareCenter/Files/WSM/Dimension_2_1_1_U2/watchguard-dimension_2_1_1_U2_vhd.zip',
 
     [Parameter( Position = 1 )]
-    # 'Destination for the downloaded file'
-    [String] $downloaddest = ("$env:USERPROFILE\downloads"),
+    [String] $DownloadDest = ("$env:USERPROFILE\downloads"),
 
     [Parameter( Position = 2 )]
-    # 'Name of new vswitch that will be created.  Can use existing'
-    [String] $vswitch = 'WG vSwitch',
+    [String] $VSwitch = 'WG vSwitch',
 
     [Parameter( Position = 3 )]
-    # 'Use Get-NetAdapter to determine the adapter name'
-    [String] $nic = ( Get-NetAdapter -Physical | Where-Object -FilterScript {
-            $_.ConnectorPresent -EQ 'True' -AND $_.PhysicalMediaType -EQ '802.3' 
+    $NIC = ( Get-NetAdapter -Physical | Where-Object -FilterScript {
+            $_.ConnectorPresent -EQ 'True' -AND $_.PhysicalMediaType -EQ '802.3'
     } ), 
 
     [Parameter( Position = 4 )]
-    # 'Path to where the VM config will be stored'
-    [String] $vmpath = ('C:\vm\Dimension\'),
+    [String] $VMPath = ('C:\vm\Dimension\'),
 
     [Parameter( Position = 5 )]
-    # 'Path to the .vhd file from WG'
-    [String] $bootvhd = 'watchguard-dimension_2_1_1_U2.vhd', 
+    [String] $BootVHD = 'watchguard-dimension_2_1_1_U2.vhd', 
 
     [Parameter( Position = 6 )]
-    # 'Name of the VM'
-    [String] $vmname = 'WG_Dimension',
+    [String] $VMName = 'WG_Dimension',
 
     [Parameter( Position = 7 )]
-    # 'Path to where new virtual data drive will be stored'
-    [String] $datavhd = 'data.vhdx',
+    [String] $DataVHD = 'data.vhdx',
 
     [Switch] $SkipDownload
 
 )
 # 
 # Update when download address changes
-$download = "$downloaddest\watchguard-dimension_2_1_1_U2_vhd.zip"
+$download = "$DownloadDest\watchguard-dimension_2_1_1_U2_vhd.zip"
 #
 # Check if Hyper-V is installed
-if ( (Get-WindowsFeature -Name 'Hyper-V').Installed -eq $false )
-{
-    Install-WindowsFeature -Name 'Hyper-V' -IncludeAllSubFeature
-}
-#
+<#if ( (Get-WindowsFeature -Name 'Hyper-V').Installed -eq $false )
+        {
+        Install-WindowsFeature -Name 'Hyper-V' -IncludeAllSubFeature
+        }
+#>#
 # If command line switch specifed skip the download
 if ( $SkipDownload ) 
 {
@@ -73,7 +104,7 @@ elseif ( ( Test-Path -Path "$vmpath\$bootvhd" ) -eq $false )
     # Download the file from WatchGuard.
     Start-BitsTransfer -Source $uri -Destination $downloaddest  -TransferType Download
     # Extract file. If the DestinaationPath does not exist it is automatically created.
-    Expand-Archive -Path $download -DestinationPath $vmpath
+    Expand-Archive -Path $download -DestinationPath $vmpath 
 }
 # Create a new vmswitch in Hyper-V
 New-VMSwitch -Name $vswitch -NetAdapterName $nic.ifAlias -Notes 'Switch created for WG Dimension server VM'
