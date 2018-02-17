@@ -1,5 +1,5 @@
-﻿#requires -Modules BitsTransfer, Hyper-V, NetAdapter, ServerManager
-#requires -version 5.0
+﻿#requires -Modules BitsTransfer, Hyper-V, NetAdapter, ServerManager -version 5.0
+
 <#
         .SYNOPSIS
         All of the steps needed to create a new WatchGuard Dimension server in MS Hyper-V 2008 R2 or newer.
@@ -35,10 +35,10 @@
         Switch to prevent skip trying to download the install file from WatchGuard. 
 
         .EXAMPLE
-        Example of how to use this cmdlet
+        C:\ .\Setup-WGDimension
 
         .EXAMPLE
-        Another example of how to use this cmdlet
+        C:\ .\Setup-WGDimension -SkipDownload
 
         .NOTES
         Created by Eric Vollbrecht vollbrechteric@hotmail.com
