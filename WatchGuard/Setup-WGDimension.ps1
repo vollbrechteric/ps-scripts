@@ -35,10 +35,10 @@
         Switch to prevent skip trying to download the install file from WatchGuard. 
 
         .EXAMPLE
-        C:\ .\Setup-WGDimension
+        >> .\Setup-WGDimension
 
         .EXAMPLE
-        C:\ .\Setup-WGDimension -SkipDownload
+        >> .\Setup-WGDimension -SkipDownload
 
         .NOTES
         Created by Eric Vollbrecht vollbrechteric@hotmail.com
@@ -90,7 +90,7 @@ $download = "$DownloadDest\watchguard-dimension_2_1_1_U2_vhd.zip"
         {
         Install-WindowsFeature -Name 'Hyper-V' -IncludeAllSubFeature
         }
-#>#
+#>
 # If command line switch specifed skip the download
 if ( $SkipDownload ) 
 {
