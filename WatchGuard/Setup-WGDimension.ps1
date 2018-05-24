@@ -1,4 +1,21 @@
-﻿#requires -Modules BitsTransfer, Hyper-V, NetAdapter, ServerManager -version 5.0
+<#PSScriptInfo
+        .VERSION 1.0
+        .GUID b1e04006-2ff1-4a72-a631-cc887231172e
+        .AUTHOR Eric Vollbrecht
+        .COMPANYNAME 
+        .COPYRIGHT 
+        .DESCRIPTION Create a new WatchGuard Dimension server in MS Hyper-V 2008 R2 or newer.
+        .TAGS WatchGuard 
+        .LICENSEURI 
+        .PROJECTURI https://github.com/vollbrechteric/ps-scripts
+        .ICONURI 
+        .EXTERNALMODULEDEPENDENCIES BitsTransfer Hyper-V NetAdapter ServerManager
+        .REQUIREDSCRIPTS 
+        .EXTERNALSCRIPTDEPENDENCIES 
+        .RELEASENOTES
+#>
+
+#requires -Modules BitsTransfer, Hyper-V, NetAdapter, ServerManager -version 5.0
 
 <#
         .SYNOPSIS
@@ -43,7 +60,7 @@
         .NOTES
         Created by Eric Vollbrecht vollbrechteric@hotmail.com
         This script is intended to run from the local server where Dimension will be stored.
-        Once thc script completes check DHCP server for IP address of new VM and connect to via HTTPS and use the default credentials.
+        Once the script completes check DHCP server for IP address of new VM and connect to via HTTPS and use the default credentials.
 
         .LINK
         https://github.com/vollbrechteric/ps-scripts
