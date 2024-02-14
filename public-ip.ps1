@@ -13,4 +13,11 @@
 )
 
 $IP = Invoke-RestMethod -Uri "$uri"
-$IP
+
+if ($IP -as [IPAddress] -as [Bool])
+{
+    $IP
+}
+else {
+    "$IP" + ' is not a valid IP'
+}
